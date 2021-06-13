@@ -40,7 +40,7 @@ def secant_method(a, b, eps):
     if xr_1 is not None:
         for i in range(len(xr_List)):
             print(f"step = {i + 1} xR = {xr_List[i]}, xR+1 = {xr_1List[i]}, f(xR) = {fxList[i]}")
-        print(f" Found root after {Iteration} in segment [{min:.2f} ,{max:.2f}]: root is {xr_1}")
+        print(f" Found root after {Iteration} Iteration in segment [{min:.2f} ,{max:.2f}]: root is {xr_1}")
 
 
 

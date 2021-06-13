@@ -1,4 +1,5 @@
 import sympy as sp
+from datetime import *
 
 x = sp.symbols('x')
 
@@ -111,34 +112,50 @@ def polynomial_interpolation(pointlist, xf):
         b[i] = pointlist[i][1]
     a = calc_av(A, b)
     p = 0
-
+    pstr = "p{0}(x) = ".format(n - 1)
     for i in range(n):
         p = p + a[i] * xf ** i
+        if i is 0:
+            pstr += "{:.5}x**{} ".format(a[i], i)
+        if a[i] > 0:
+            pstr += "+{:.5}x**{} ".format(a[i], i)
+        else:
+            pstr += "{:.5}x**{} ".format(a[i], i)
+        print("p{}({}) = {:.5}".format(i, xf, p))
+    pstr.replace(" ", "+")
+    print(pstr)
+    print("p{0}({1}) = {2}".format(n - 1, xf, p))
     return p
+
+
 def neville_interpolation(pointlist, xf):
-   n= len(pointlist)
-   p= n * [0]
-   for k in range(n):
+    n = len(pointlist)
+    p = n * [0]
+    for k in range(n):
         iteration = k
         for i in range(n - k):
             if k == 0:
                 p[i] = pointlist[i][1]
             else:
-                p[i] = ((xf - pointlist[i][i + k]) * p[i] + (pointlist[i][0] - xf) * p[i + 1]) / (pointlist[i][0] - pointlist[i][i + k])
-                print(f'polynomial {i}, {iteration} = {p[i]:.5f}')
+                p[i] = ((xf - pointlist[i + k][0]) * p[i] + (pointlist[i][0] - xf) * p[i + 1]) / (
+                        pointlist[i][0] - pointlist[i + k][0])
+                print(f'p {i}, {iteration} = {p[i]:.5f}')
                 iteration += 1
-            if k + 1 != n:
-                print('\n************ Iteration No.' + str(k + 1) + ' ************')
-        print('\nF(x = ' + str(xf) + ') = ', end='')
-        return p[0]
+        if k + 1 != n:
+            print('\n=====================Iteration ' + str(k + 1) + ' ==============================')
+    print('\nF( ' + str(xf) + ') = ', end='')
+    return p[0]
 
-def main():
+
+def main35():
     inter_t = [[1.2, 3.5095], [1.3, 3.6984], [1.4, 3.9043], [1.5, 4.1293], [1.6, 4.3756]]
     xf = 1.37
     fx = polynomial_interpolation(inter_t, xf)
-    print("The close value of the point {0} by polynomial interpolation method is : {1:.5}" .format(xf, fx))
-    neville_interpolation(inter_t, xf)
+    now = datetime.now()
+    str = '{0}{1}{2}'.format(now.day, now.hour, now.minute)
+    print("The close value of the point {0} by polynomial interpolation method is : {1:.5}00000{2}".format(xf, fx, str))
+    fx = neville_interpolation(inter_t, xf)
+    print("The close value of the point {0} by neville interpolation method is : {1:.5}00000{2}".format(xf, fx, str))
 
 
-
-main()
+main35()

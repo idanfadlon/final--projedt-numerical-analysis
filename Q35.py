@@ -127,10 +127,10 @@ def neville_interpolation(pointlist, xf):
                 p[i] = ((xf - pointlist[i][i + k]) * p[i] + (pointlist[i][0] - xf) * p[i + 1]) / (pointlist[i][0] - pointlist[i][i + k])
                 print(f'polynomial {i}, {iteration} = {p[i]:.5f}')
                 iteration += 1
-        if k + 1 != n:
-            print('\n************ Iteration No.' + str(k + 1) + ' ************')
-    print('\nF(x = ' + str(xf) + ') = ', end='')
-    return p[0]
+            if k + 1 != n:
+                print('\n************ Iteration No.' + str(k + 1) + ' ************')
+        print('\nF(x = ' + str(xf) + ') = ', end='')
+        return p[0]
 
 def main():
     inter_t = [[1.2, 3.5095], [1.3, 3.6984], [1.4, 3.9043], [1.5, 4.1293], [1.6, 4.3756]]

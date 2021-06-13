@@ -36,7 +36,6 @@ def secant_method(a, b, eps):
         a = b
         b = xr_1
         Iteration += 1
-
         flag = abs(xr_1-a) > eps
     if xr_1 is not None:
         for i in range(len(xr_List)):
@@ -49,7 +48,7 @@ def secant_method(a, b, eps):
 
 
 def main9():
-    epsilon = 0.0001
+    epsilon = 0.0000000000001
     start = -1.5
     end = 1.5
     step = 0.1

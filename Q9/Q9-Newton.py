@@ -36,14 +36,13 @@ def newton(x0, x1, eps):
         if abs(fxi) <= eps:
             for i in range(len(xiList)):
                 print(f"iteration = {i + 1} xi = {xiList[i]}, f(xi) = {fxList[i]}, f'(xi) = {fTagxList[i]}")
-            print("*" * 50)
             print(f"Section [{min:.1f} ,{max:.1f}]: Found solution after {iter} iterations: {xi}")
-            print("*" * 50)
+
             break
 
         xiList.append(xi)
         fxList.append(f(xi))
-        fTagxList.append(df(xi))
+        fTagxList.append(fTag(xi))
         xi = xi - fxi / fTagxi
         iter += 1
 

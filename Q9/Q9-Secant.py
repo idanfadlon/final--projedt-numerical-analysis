@@ -36,7 +36,7 @@ def secant_method(a, b, eps):
         b = xr_1
         Iteration += 1
 
-        flag = abs(f(xr_1)) > eps
+        flag = abs(xr_1-a) > eps
     if xr_1 is not None:
         for i in range(len(xr_List)):
             print(f"step = {i + 1} xR = {xr_List[i]}, xR+1 = {xr_1List[i]}, f(xR) = {fxList[i]}")

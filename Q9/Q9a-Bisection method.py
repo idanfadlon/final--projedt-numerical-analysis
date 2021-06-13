@@ -1,5 +1,5 @@
 from datetime import *
-from math import e,sin,log,ceil,cos
+from math import e, sin, log, ceil, cos
 
 import numpy as np
 from sympy.utilities.lambdify import lambdify
@@ -7,19 +7,20 @@ import sympy as sp
 
 roots = []
 
+
 def f(x):
     # for calculation of function in point x
-    return (sin(x ** 4 + 5 * x - 6)) / (2 * e**(-2 * x + 5))
+    return (sin(x ** 4 + 5 * x - 6)) / (2 * e ** (-2 * x + 5))
 
 
 def fTag(x):
     # for calculation of function prime in point x
-    return (5 / 2) * (e**(2 * x - 5) * cos((x ** 4) - 6 + 5 * x) + 2 * e**(2 * x - 5) * (x ** 3) * cos((x ** 4) - 6 + 5 * x) + e**(2 * x))
+    return (5 / 2) * (e ** (2 * x - 5) * cos((x ** 4) - 6 + 5 * x) + 2 * e ** (2 * x - 5) * (x ** 3) * cos(
+        (x ** 4) - 6 + 5 * x) + e ** (2 * x))
+
 
 def Bisection_Method(start_point, end_point, epsilon):
-
-
-    value=subBisection(start_point, end_point, epsilon)
+    value = subBisection(start_point, end_point, epsilon)
     if value != None:
         roots.append(value)
         return
@@ -27,12 +28,11 @@ def Bisection_Method(start_point, end_point, epsilon):
     return
 
 
-
-def subBisection(a, b,  eps):
+def subBisection(a, b, eps):
     maxIter = int(ceil((-1) * (log(eps / (b - a)) / log(2))))
     iter = 0
-    start=a
-    end=b
+    start = a
+    end = b
     while abs(b - a) > eps:
         if maxIter >= iter:
             iter += 1
@@ -50,7 +50,8 @@ def subBisection(a, b,  eps):
             return
     now = datetime.now()
     str = '{0}{1}{2}'.format(now.day, now.hour, now.minute)
-    print(" Found root after {0} Iteration in segment [{1} ,{2}]: ".format(iter, start, end, )+f'root is {c}00000{str}')
+    print(
+        " Found root after {0} Iteration in segment [{1} ,{2}]: ".format(iter, start, end, ) + f'root is {c}00000{str}')
     return f'{c}00000{str}'
 
 
@@ -70,9 +71,10 @@ def main():
         print("No roots were found using a secant method")
     else:
         for section in secant_section_list:
-            Bisection_Method(section[0],section[1],epsilon)
+            Bisection_Method(section[0], section[1], epsilon)
     print("\nAll rotts:\n")
     for i in range(len(roots)):
         print(roots[i] + '\n')
+
 
 main()

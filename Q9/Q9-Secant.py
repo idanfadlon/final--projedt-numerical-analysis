@@ -1,8 +1,9 @@
 #9a
 import numpy as np
 from math import e, sin
+from datetime import *
 
-
+RootsList=[]
 def f(x):
     # for calculation of function in point x
     return (sin(x ** 4 + 5 * x - 6)) / (2 * e**(-2 * x + 5))
@@ -40,6 +41,9 @@ def secant_method(a, b, eps):
     if xr_1 is not None:
         for i in range(len(xr_List)):
             print(f"step = {i + 1} xR = {xr_List[i]}, xR+1 = {xr_1List[i]}, f(xR) = {fxList[i]}")
+        now = datetime.now()
+        str = '{0}{1}{2}'.format(now.day, now.hour, now.minute)
+        RootsList.append('{0}00000{1}'.format(xr_1,str))
         print(f" Found root after {Iteration} Iteration in segment [{min:.2f} ,{max:.2f}]: root is {xr_1}")
 
 
@@ -48,7 +52,7 @@ def main9():
     epsilon = 0.0001
     start = -1.5
     end = 1.5
-    step = 0.01
+    step = 0.1
     secant_section_list = []
 
     for i in np.arange(start, end, step):
@@ -63,5 +67,6 @@ def main9():
     else:
         for section in secant_section_list:
             secant_method(section[0], section[1], epsilon)
-
+    for i in range (len(RootsList)):
+        print(RootsList[i]+'\n')
 main9()

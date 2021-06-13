@@ -143,7 +143,7 @@ def neville_interpolation(pointlist, xf):
                 iteration += 1
         if k + 1 != n:
             print('\n=====================Iteration ' + str(k + 1) + ' ==============================')
-    print('\nF(x = ' + str(xf) + ') = ', end='')
+    print('\nF( ' + str(xf) + ') = ', end='')
     return p[0]
 
 

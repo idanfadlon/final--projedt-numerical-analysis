@@ -6,15 +6,21 @@ from sympy.utilities.lambdify import lambdify
 import sympy as sp
 
 roots = []
-
-def f(x):
+x =sp.symbols('x')
+f = (x * e**(-x**2+5*x-3) )*(x**2 +3*x-5)
+f_prime = f.diff(x)
+f=lambdify(x,f_prime)
+f_prime=lambdify(x,f_prime)
+def f1(n):
     # for calculation of function in point x
+    #return f(n)
     return (x * e**(-x**2+5*x-3) )*(x**2 +3*x-5)
 
 
-def fTag(x):
+def fTag(n):
     # for calculation of function prime in point x
-    return (5 / 2) * (e**(2 * x - 5) * cos((x ** 4) - 6 + 5 * x) + 2 * e**(2 * x - 5) * (x ** 3) * cos((x ** 4) - 6 + 5 * x) + e**(2 * x))
+    return f_prime(n)
+    #return -2 * e ** (-n ** 2 + 5 * n - 3) * n ** 4 - e ** (-n ** 2 + 5 * n - 3) * n ** 3 + 28 * e ** (-n ** 2 + 5 * n - 3) * n ** 2 - 19 * e ** (-n ** 2 + 5 * n - 3) * n - 5 * e ** (-n ** 2 + 5 * n - 3)
 
 def Bisection_Method(start_point, end_point, epsilon):
 
@@ -55,8 +61,8 @@ def subBisection(a, b,  eps):
 
 
 def main():
-    epsilon = 0.00000001
-    start = -1.5
+    epsilon = 0.0000001
+    start = 0
     end = 1.5
     step = 0.1
     secant_section_list = []

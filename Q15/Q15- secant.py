@@ -1,12 +1,21 @@
-#9a
+#15a
 import numpy as np
 from math import e, sin
 from datetime import *
 
+import numpy as np
+from sympy.utilities.lambdify import lambdify
+import sympy as sp
+
+x =sp.symbols('x')
+f = (x * e**(-x**2+5*x-3) )*(x**2 +3*x-5)
+f_prime = f.diff(x)
+f=lambdify(x,f_prime)
+f_prime=lambdify(x,f_prime)
 RootsList=[]
-def f(x):
+def f1(x):
     # for calculation of function in point x
-    return (x * e ** (-x ** 2 + 5 * x - 3)) * (x ** 2 + 3 * x - 5)
+    return (x * e**(-x**2+5*x-3) )*(x**2 +3*x-5)
 
 
 def secant_method(a, b, eps):
@@ -48,7 +57,7 @@ def secant_method(a, b, eps):
 
 
 def main15():
-    epsilon = 0.0000000000001
+    epsilon = 0.00000000001
     start = 0
     end = 1.5
     step = 0.1

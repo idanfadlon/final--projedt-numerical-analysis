@@ -1,17 +1,21 @@
 from math import e, cos, sin
 import numpy as np
+from sympy.utilities.lambdify import lambdify
+import sympy as sp
+x =sp.symbols('x')
+f = (x * e**(-x**2+5*x-3) )*(x**2 +3*x-5)
+f_prime = f.diff(x)
 
 
-def f(x):
+def f1(n):
     # for calculation of function in point x
-    return (x * e**(-x**2+5*x-3) )*(x**2 +3*x-5)
+    return f.subs(x,n)
 
 
-def fTag(x):
+def fTag(n):
     # for calculation of function prime in point x
-    return (5 / 2) * (e**(2 * x - 5) * cos((x ** 4) - 6 + 5 * x) + 2 * e**(2 * x - 5) * (x ** 3) * cos((x ** 4) - 6 + 5 * x) + e**(2 * x))
-
-
+    return f_prime.subs(x,n)
+b=-2*e**(-x**2+5*x-3)*x**4-e**(-x**2+5*x-3)*x**3+28*e**(-x**2+5*x-3)*x**2-19*e**(-x**2+5*x-3)*x-5*e**(-x**2+5*x-3)
 def newton(a, b, eps):
     # Newton Raphson Method
     min = a
@@ -23,7 +27,7 @@ def newton(a, b, eps):
     fTagxList = []
 
     while True:
-        fxr_1 = f(xr_1)
+        fxr_1 = f1(xr_1)
         fTagxr_1 = fTag(xr_1)
 
         if (xr_1 < min or xr_1 > max) and xr_1 < 0:
@@ -42,7 +46,7 @@ def newton(a, b, eps):
             break
 
         xr_1List.append(xr_1)
-        fxList.append(f(xr_1))
+        fxList.append(f1(xr_1))
         fTagxList.append(fTag(xr_1))
         xr_1 = xr_1 - (fxr_1 / fTagxr_1)
         step += 1
@@ -51,14 +55,14 @@ def newton(a, b, eps):
 def main():
     epsilon = 1e-7
     step = 0.1
-    min_range = -1.5
+    min_range = 0
     max_range = 1.5
     section_list = []
 
     # Check if there is a root in a certain value range (in increments of 0.1)
     for i in np.arange(min_range, max_range, step):
         i = round(i, 2)
-        if f(i) * f(i + 0.1) <= 0:
+        if f1(i) * f1(i + 0.1) <= 0:
             section_list.append((i, i + step))
 
     # Finding roots by Newton Raphson method:
@@ -68,3 +72,4 @@ def main():
     else:
         for section in section_list:
             newton(section[0], section[1], epsilon)
+main()

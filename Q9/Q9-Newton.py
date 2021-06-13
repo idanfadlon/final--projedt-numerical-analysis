@@ -4,7 +4,7 @@ import numpy as np
 
 def f(x):
     # for calculation of function in point x
-    return (sin(x ** 4 + 5 * x - 6)) / (2 * e(-2 * x + 5))
+    return (sin(x ** 4 + 5 * x - 6)) / (2 * e**(-2 * x + 5))
 
 
 def fTag(x):
@@ -49,18 +49,18 @@ def newton(x0, x1, eps):
         iter += 1
 
 
-if __name__ == "__main__":
-    epsilon = 1e-6
+def main():
+    epsilon = 1e-7
     step = 0.1
-    min_range = -1.1
-    max_range = 2
-    newton_section_list = []
+    min_range = -1.5
+    max_range = 1.5
+    section_list = []
 
     # Check if there is a root in a certain value range (in increments of 0.1)
     for i in np.arange(min_range, max_range, step):
         i = round(i, 2)
         if f(i) * f(i + 0.1) <= 0:
-            newton_section_list.append((i, i + step))
+            section_list.append((i, i + step))
 
     # Finding roots by Newton Raphson method:
     print("-" * 70)
@@ -68,8 +68,8 @@ if __name__ == "__main__":
     print("-" * 70)
 
     # Sending X0 for which a root approximation is found
-    if len(newton_section_list) == 0:
+    if len(section_list) == 0:
         print("cannot use Newton Raphson method")
     else:
-        for section in newton_section_list:
+        for section in section_list:
             newton(section[0], section[1], epsilon)

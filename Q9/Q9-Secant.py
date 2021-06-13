@@ -1,53 +1,53 @@
-#9b
+#9a
 import numpy as np
 from math import e, sin
 
 
+def f(x):
+    # for calculation of function in point x
+    return (sin(x ** 4 + 5 * x - 6)) / (2 * e**(-2 * x + 5))
 
-def secant_method(x0, x1, tol):
-    x2 = 0
-    min = x0
-    max = x1
-    iter = 1
+
+def secant_method(a, b, eps):
+    xr_1 = 0
+    min = a
+    max = b
+    Iteration = 1
     flag = True
-    x1List = []
-    x0List = []
+    xr_1List = []
+    xr_List = []
     fxList = []
 
     while flag:
-        if f(x0) == f(x1):
-            print("Divide by zero error!")
+        if f(a) == f(b):
             break
 
-    #calc next iteration
-        x2 = x0 - (x1 - x0) * f(x0) / (f(x1) - f(x0))
-        if x2 > max or x2 < min:
-            x2 = None
+    #calc next point
+        xr_1 = a - (b - a) * f(a) / (f(b) - f(a))
+
+        if xr_1 > max or xr_1 < min:
+            xr_1 = None
             break
     #update lists
-        x0List.append(x0)
-        x1List.append(x1)
-        fxList.append(f(x0))
-        x0 = x1
-        x1 = x2
-        iter += 1
+        xr_List.append(a)
+        xr_1List.append(b)
+        fxList.append(f(a))
+        a = b
+        b = xr_1
+        Iteration += 1
 
-        flag = abs(f(x2)) > tol
-    if x2 is not None:
-        for x0 in range(len(x0List)):
-            print(f"iteration = {x0 + 1} x0 = {x0List[x0]}, x1 = {x1List[x0]}, f(x0) = {fxList[x0]}")
-        print(f"Section [{min:.2f} ,{max:.2f}]: Found solution after {iter} iterations: {x2}")
+        flag = abs(f(xr_1)) > eps
+    if xr_1 is not None:
+        for i in range(len(xr_List)):
+            print(f"step = {i + 1} xR = {xr_List[i]}, xR+1 = {xr_1List[i]}, f(xR) = {fxList[i]}")
+        print(f" Found root after {Iteration} in segment [{min:.2f} ,{max:.2f}]: root is {xr_1}")
 
-
-def f(x):
-    # for calculation of function in point x
-    return (sin(x ** 4 + 5 * x - 6)) / (2 * e(-2 * x + 5))
 
 
 def main9():
     epsilon = 0.0001
-    start = -1.1
-    end = 2
+    start = -1.5
+    end = 1.5
     step = 0.01
     secant_section_list = []
 

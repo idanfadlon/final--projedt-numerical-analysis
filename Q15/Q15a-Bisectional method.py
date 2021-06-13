@@ -1,31 +1,24 @@
 from datetime import *
-from math import e,sin,log,ceil,cos
+from math import e, sin, log, ceil, cos
 
 import numpy as np
 from sympy.utilities.lambdify import lambdify
 import sympy as sp
+roots=[]
 
-roots = []
-x =sp.symbols('x')
-f = (x * e**(-x**2+5*x-3) )*(x**2 +3*x-5)
-f_prime = f.diff(x)
-f=lambdify(x,f_prime)
-f_prime=lambdify(x,f_prime)
-def f1(n):
+def f(x):
     # for calculation of function in point x
-    #return f(n)
-    return (x * e**(-x**2+5*x-3) )*(x**2 +3*x-5)
+    return (x * e ** (-x ** 2 + 5 * x - 3)) * (x ** 2 + 3 * x - 5)
 
 
-def fTag(n):
+def fTag(x):
     # for calculation of function prime in point x
-    return f_prime(n)
-    #return -2 * e ** (-n ** 2 + 5 * n - 3) * n ** 4 - e ** (-n ** 2 + 5 * n - 3) * n ** 3 + 28 * e ** (-n ** 2 + 5 * n - 3) * n ** 2 - 19 * e ** (-n ** 2 + 5 * n - 3) * n - 5 * e ** (-n ** 2 + 5 * n - 3)
+    return -2 * (e ** (-x ** 2 + 5 * x - 3)) * x ** 4 - (e ** (-x ** 2 + 5 * x - 3)) * x ** 3 + 28 * (e ** (
+            -x ** 2 + 5 * x - 3)) * x ** 2 - 19 * (e ** (-x ** 2 + 5 * x - 3)) * x - 5 * (e ** (-x ** 2 + 5 * x - 3))
+
 
 def Bisection_Method(start_point, end_point, epsilon):
-
-
-    value=subBisection(start_point, end_point, epsilon)
+    value = subBisection(start_point, end_point, epsilon)
     if value != None:
         roots.append(value)
         return
@@ -33,12 +26,11 @@ def Bisection_Method(start_point, end_point, epsilon):
     return
 
 
-
-def subBisection(a, b,  eps):
+def subBisection(a, b, eps):
     maxIter = int(ceil((-1) * (log(eps / (b - a)) / log(2))))
     iter = 0
-    start=a
-    end=b
+    start = a
+    end = b
     while abs(b - a) > eps:
         if maxIter >= iter:
             iter += 1
@@ -56,7 +48,8 @@ def subBisection(a, b,  eps):
             return
     now = datetime.now()
     str = '{0}{1}{2}'.format(now.day, now.hour, now.minute)
-    print(" Found root after {0} Iteration in segment [{1} ,{2}]: ".format(iter, start, end, )+f'root is {c}00000{str}')
+    print(
+        " Found root after {0} Iteration in segment [{1} ,{2}]: ".format(iter, start, end, ) + f'root is {c}00000{str}')
     return f'{c}00000{str}'
 
 
@@ -76,9 +69,10 @@ def main():
         print("No roots were found using a secant method")
     else:
         for section in secant_section_list:
-            Bisection_Method(section[0],section[1],epsilon)
+            Bisection_Method(section[0], section[1], epsilon)
     print("\nAll rotts:\n")
     for i in range(len(roots)):
         print(roots[i] + '\n')
+
 
 main()

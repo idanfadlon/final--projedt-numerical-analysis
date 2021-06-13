@@ -87,9 +87,6 @@ def main_rumberg():
             if rumberg_temp[i][j] != 0:
                 print(rumberg_temp[i][j], end=" ")
         print(" ")
-
-    print(f"Section [{start}, {end}] is divided into n = {int(n)} "
-          f"sections in order to achieve the accuracy of {epsilon}")
     now = datetime.now()
     str = '{0}{1}{2}'.format(now.day, now.hour, now.minute)
     print(f"Rumberg Method Answer = {temp_return_val}00000{str}")

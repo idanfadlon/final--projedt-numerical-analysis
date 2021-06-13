@@ -24,9 +24,9 @@ def trapeze():
         i += sec
     now = datetime.now()
     str = '{0}{1}{2}'.format(now.day, now.hour, now.minute)
-    print("Trapeze Method")
+    print("Trapeze Method Answer")
     print(f"{sum}00000{str}")
-
+trapeze()
 
 def createMat(size):
     newMat = []
@@ -69,7 +69,7 @@ def rumberg(a, b, n):
     return r
 
 
-def main_romberg():
+def main_rumberg():
     start = -0.5
     end = 0.5
     n = 10
@@ -80,7 +80,7 @@ def main_romberg():
     # Check the amount of sections required to achieve desired accuracy
     while epsilon > 1e-6:
         n += 1
-        return_val = romberg(start, end, n)
+        return_val = rumberg(start, end, n)
         return_val = return_val[-1][-1]
         epsilon = abs(temp_return_val - return_val)
         if epsilon >= 1e-6:
@@ -88,17 +88,17 @@ def main_romberg():
         else:
             n -= 1
 
-    romberg_temp = romberg(start, end, n)
+    rumberg_temp = rumberg(start, end, n)
 
-    for i in range(len(romberg_temp)):
-        for j in range(len(romberg_temp)):
-            if romberg_temp[i][j] != 0:
-                print(romberg_temp[i][j], end=" ")
+    for i in range(len(rumberg_temp)):
+        for j in range(len(rumberg_temp)):
+            if rumberg_temp[i][j] != 0:
+                print(rumberg_temp[i][j], end=" ")
         print(" ")
 
     print(f"Section [{start}, {end}] is divided into n = {int(n)} "
           f"sections in order to achieve the accuracy of {epsilon}")
-    print(f"Answer = {temp_return_val}")
+    print(f"Rumberg Answer = {temp_return_val}")
 
 
-main_romberg()
+main_rumberg()

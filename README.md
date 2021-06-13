@@ -1,1 +1,1 @@
-# final--projedt-numerical-analysis
+# final-project-numerical-analysis

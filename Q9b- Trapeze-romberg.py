@@ -8,7 +8,7 @@ def f(x):
 
 
 def trapArea(a, b):
-    #calculates trapeze area
+    # calculates trapeze area
     return 0.5 * (b - a) * (f(a) + f(b))
 
 
@@ -26,7 +26,10 @@ def trapeze():
     now = datetime.now()
     str = '{0}{1}{2}'.format(now.day, now.hour, now.minute)
     print(f"Trapeze Method Answer:{sum}00000{str}\n\n")
+
+
 trapeze()
+
 
 def createMat(size):
     newMat = []
@@ -38,7 +41,7 @@ def createMat(size):
 
 
 def rumberg(a, b, n):
-    r = createMat(n+1)
+    r = createMat(n + 1)
     h = b - a
     r[0][0] = 0.5 * h * (f(a) + f(b))
 
@@ -49,12 +52,12 @@ def rumberg(a, b, n):
         powerOf2 = 2 * powerOf2
         for k in range(1, powerOf2, 2):
             sum = sum + f(a + k * h)
-        r[i][ 0] = 0.5 * r[i - 1][ 0] + sum * h
+        r[i][0] = 0.5 * r[i - 1][0] + sum * h
 
         powerOf4 = 1
         for j in range(1, i + 1):
             powerOf4 = 4 * powerOf4
-            r[i][ j] = r[i][ j - 1] + (r[i][ j - 1] - r[i - 1][ j - 1]) / (powerOf4 - 1)
+            r[i][j] = r[i][j - 1] + (r[i][j - 1] - r[i - 1][j - 1]) / (powerOf4 - 1)
 
     return r
 

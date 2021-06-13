@@ -177,7 +177,7 @@ def findSuspects(polynomial, start, end):
         floatList.append((float(suspect[i][0]), float(suspect[i][1])))
     return floatList
 
-def main():
+def main1():
     polynomial = sy.exp((math.sin(x ** 4 + 5 * x - 6)) / (2 * math.e ** (-2 * x + 5)))
     start = -1.5
     end = 1.5

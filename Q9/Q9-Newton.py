@@ -9,8 +9,7 @@ def f(x):
 
 def fTag(x):
     # for calculation of function prime in point x
-    return (5 / 2) * (e(2 * x - 5) * cos((x ** 4) - 6 + 5 * x) + 2 * e(2 * x - 5) * (x ** 3) * cos(
-        (x ** 4) - 6 + 5 * x) + math.e(2 * x))
+    return (5 / 2) * (e**(2 * x - 5) * cos((x ** 4) - 6 + 5 * x) + 2 * e**(2 * x - 5) * (x ** 3) * cos((x ** 4) - 6 + 5 * x) + e**(2 * x))
 
 
 def newton(x0, x1, eps):
